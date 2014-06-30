@@ -1,0 +1,50 @@
+### BEGIN INIT INFO
+# Provides: start-pentaho stop-pentaho
+# Default-Start: 2 3 4 5
+# Default-Stop: 0 1 6
+# Description: Pentaho BI Platform
+### END INIT INFO
+
+export JAVA_HOME="SET_JDK_PATH"
+ 
+start(){
+
+	if [ $1 = "adm" ];
+	then
+		echo "Starting administration-console"	
+		cd /opt/gerador_relatorio/administration-console
+		./start-pac.sh > /tmp/administration_console.out 2>&1 &
+	else
+		echo "Starting Pentaho biserver"
+		cd /opt/gerador_relatorio/biserver-ce
+		./start-pentaho.sh > /tmp/gerador_relatorios.out 2>&1
+	fi 
+}
+ 
+stop(){
+	 
+	if [ $1 = "adm" ];
+	then
+		echo "Stopping administration-console"
+		cd /opt/gerador_relatorio/administration-console
+		./stop-pac.sh
+	else
+		echo "Stopping Pentaho biserver"
+		cd /opt/gerador_relatorio/biserver-ce
+		./stop-pentaho.sh
+	fi
+}
+ 
+case "$1" in
+	start)
+	start $2;;
+	
+	stop)
+	stop $2;;
+*)
+
+printf "\nUsage: $0 \n
+start | stop : Start or stop the Pentaho biserver\n
+start adm | stop adm : Start or stop the administration console\n\n";;
+esac
+exit 0
