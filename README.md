@@ -51,3 +51,6 @@ Script for installation of Pentaho BI-Server as service
   ```Shell
   service pentaho stop adm
    ```
+   
+## Credits
+Thanks @oDanielRabelo for write the tutorial http://danielrabelo.wordpress.com/2013/09/06/pentaho-4-8-inicializando-como-servico-no-centos-6-2/
